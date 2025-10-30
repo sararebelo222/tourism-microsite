@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Canonical (REPLACE with your live URL) -->
-  https://lisbon-local.example/
+
 
   <title>Lisbon Food & Culture Tours | Small-Group, Book Today</title>
   <meta name="description" content="Eat and explore Lisbon like a local. Small‑group food & culture tours with dietary options and free cancellation. Check availability and book today." />
@@ -92,7 +92,7 @@
 
     .card{background:var(--card);border:1px solid color-mix(in oklab,var(--text) 10%,transparent);border-radius:14px;overflow:clip;box-shadow:var(--shadow);display:grid;grid-template-rows:auto auto;position:relative}
     .card-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0f1720}
-    .card-media img{width:1200;height:800;max-width:100%;object-fit:cover;display:block}
+    .card-media img{width:100%;height:100%;object-fit:cover;display:block}
     .card-body{padding:14px;display:grid;gap:10px}
     .card h3{margin:0;font-size:18px}
     .tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -136,7 +136,7 @@
 </head>
 
 <body>
-  #mainSkip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Header / Primary Navigation -->
   <header class="header" role="banner">
@@ -146,13 +146,13 @@
         <span>Lisbon Local</span>
       </div>
       <nav class="nav-links" aria-label="Primary" role="navigation">
-        #heroHome</a>
-        #experiencesExperiences</a>
-        #quizQuiz</a>
-        #mapMap</a>
-        #participateParticipate</a>
-        #experiencesBook</a>
-      </nav>
+  <a class="label" href="#hero">Home</a>
+  <a class="label" href="#experiences">Experiences</a>
+  <a class="label" href="#quiz">Quiz</a>
+  <a class="label" href="#map">Map</a>
+  <a class="label" href="#participate">Participate</a>
+  <a class="btn primary" href="#experiences" data-scroll>Book</a>
+</nav>
     </div>
   </header>
 
@@ -230,7 +230,7 @@
       <p class="lead">Explore central spots — easy access by metro and on foot.</p>
       <div class="map-wrap">
         <!-- Note: sandbox for iframes increases security; some Google Maps features may be limited -->
-        https://www.google.com/maps?q=Lisbon&output=embed</iframe>
+        <iframe class="map" src="https://www.google.com/maps?q=Lisbon&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <p class="helper">Tip: open a card’s map/book button for precise locations.</p>
     </section>
@@ -281,542 +281,62 @@
     </div>
   </section>
 
-  <!--
-    Analytics (privacy-friendly) — LOAD ONLY AFTER CONSENT
-
-    HOW TO ENABLE:
-    1) Pick ONE provider below and fill in the config in analyticsConfig.
-    2) Consent flow calls loadAnalytics() to inject the script dynamically.
-    3) Keep these example script tags COMMENTED to prevent accidental loading.
-
-    Option A — Plausible (no cookies):
-      https://plausible.io/js/plausible.js</script>
-      - In JS below, set analyticsConfig.plausibleDomain = "YOUR-DOMAIN.tld"
-
-    Option B — Matomo (cookieless / consent mode):
-      <!-- Example (do not enable unless consented) -->
-      <!--
-      <script>
-        var _paq = window._paq = window._paq || [];
-        _paq.push(['disableCookies']);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="https://MATOMO-HOST/";
-          _paq.push(['setTrackerUrl', u+'matomo.php']);
-          _paq.push(['setSiteId', 'YOUR_SITE_ID']);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
-      -->
-  -->
+  
 
   <script>
-    /* =========================
-       Self-hosted images helper
-       - Store assets at ./assets/img/
-       - Filenames: {id}-{width}.{ext}
-       - Supported formats: avif, webp, jpg (fallback)
-       ========================= */
-    const WIDTHS = [400, 800, 1200];
-    function localUrl(id, w, ext) {
-      return `assets/img/${id}-${w}.${ext}`;
-    }
-    function buildSrcset(id, ext) {
-      return WIDTHS.map(w => `${localUrl(id, w, ext)} ${w}w`).join(', ');
-    }
-    // Inline SVG placeholder for graceful fallback
-    const PLACEHOLDER_DATA = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
-      `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-        <rect width="100%" height="100%" fill="#0f1720"/>
-        <text x="50%" y="50%" fill="#a0aec0" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" dominant-baseline="middle">
-          Image not available
-        </text>
-      </svg>`
-    );
-
-    /* =========================
-       Content (data) — 6 items (IDs map to image filenames)
-       ========================= */
+    // === Dados das cards ===
+    // Podes trocar o valor de "img" para outro ficheiro em /images/
     const items = [
       {
         id: "nata",
-        type: "dish",
-        alt: "Portuguese pastel de nata next to a cup of espresso",
-        title: "Pastel de Nata Tasting",
-        story: "Born in Lisbon’s monasteries, this creamy custard tart is a sweet symbol of Portugal. Pair it with a strong espresso for the ultimate local ritual.",
-        tags: ["Sweet", "Traditional", "Coffee pairing"],
-        meta: "15 min | €2–3 each",
-        where: "Pastéis de Belém or Manteigaria",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/Past%C3%A9is+de+Bel%C3%A9m+Lisbon"
+        title: "Pastel de Nata",
+        img: "images/nata_1200.jpg",
+        alt: "Pastel de nata sobre tecido rústico",
+        text: "Clássico lisboeta; melhor com café.",
+        tags: ["Doce","Tradicional","Café"],
+		 meta: ["15 min | €2–3 cada"],
       },
       {
         id: "bras",
-        type: "dish",
-        alt: "Plate of codfish with eggs and straw potatoes",
         title: "Bacalhau à Brás",
-        story: "A comforting mix of shredded cod, eggs, and crispy potatoes — a love letter to Portugal’s bacalhau tradition.",
-        tags: ["Savory", "Comfort food", "Seafood"],
-        meta: "30 min | €12–15",
-        where: "Taberna da Rua das Flores",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/Taberna+da+Rua+das+Flores+Lisbon"
-      },
-      {
-        id: "ginja",
-        type: "drink",
-        alt: "Small glass of cherry liqueur with a cherry garnish",
-        title: "Ginjinha Experience",
-        story: "A sip of cherry liqueur in a tiny glass, often with a cherry inside. A Lisbon tradition that warms the soul.",
-        tags: ["Drink", "Local tradition", "Sweet"],
-        meta: "10 min | €1.50–2",
-        where: "A Ginjinha (Rossio)",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/A+Ginjinha+Rossio+Lisbon"
+        img: "images/bras_1200.jpg", // substitui por "images/bras_1200.jpg" quando tiveres
+        alt: "Prato de bacalhau com batata palha",
+        text: "Conforto português em forma de bacalhau.",
+        tags: ["Salgado","Conforto","Mar"],
+		 meta: ["30 min | €12–15"],
+		
       },
       {
         id: "alfama",
-        type: "experience",
-        alt: "Narrow, sunlit street in Lisbon’s Alfama with tiled façades",
-        title: "Alfama Walking Tour",
-        story: "Wander through Lisbon’s oldest district, where Fado echoes in narrow alleys and history lives on every tile.",
-        tags: ["Culture", "History", "Walking tour"],
-        meta: "2h | €20–25",
-        where: "Book via local tour operators or Airbnb Experiences",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/search?q=Alfama+walking+tour+Lisbon"
+        title: "Passeio em Alfama",
+        img: "images/Alfama_1200.jpg", // substitui por "images/alfama_1200.jpg"
+        alt: "Ruas estreitas e soalheiras de Alfama",
+        text: "História, miradouros e fado pelas ruelas.",
+        tags: ["Cultura","História","Caminhada"],
+		 meta: ["2h | €20–25"],
       },
       {
         id: "mercado",
-        type: "experience",
-        alt: "Busy indoor food hall with people dining at shared tables",
-        title: "Mercado da Ribeira Food Crawl",
-        story: "Taste LisbonAbsolutely, Sara — here’s your **full updated `index.html`** that switches the site to **self‑hosted images** (no external image CDNs). It keeps everything else intact: sticky header, hero, **mood quiz (1–2 choices)** with scroll & highlight, UGC preview, cookie consent with **analytics only after consent**, accessibility and SEO improvements.
-
-> **Before you open the file:**  
-> Create an `/images/` folder next to `index.html` and add these files (export them at ~3 sizes each for responsive loading):
->
-> ```
-> /images/
->   fallback.jpg
->   nata_400.jpg     nata_800.jpg     nata_1200.jpg
->   bras_400.jpg     bras_800.jpg     bras_1200.jpg
->   ginja_400.jpg    ginja_800.jpg    ginja_1200.jpg
->   alfama_400.jpg   alfama_800.jpg   alfama_1200.jpg
->   mercado_400.jpg  mercado_800.jpg  mercado_1200.jpg
->   cruise_400.jpg   cruise_800.jpg   cruise_1200.jpg
-> ```
->
-> You can swap filenames if you prefer—just update the `imgBase` entries in the script.
-
----
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!--
-    Accessibility & SEO:
-    - H1 > H2 > H3 heading hierarchy
-    - Meta description + Open Graph
-    - Canonical URL (replace with your domain)
-  -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Canonical (REPLACE with your live URL) -->
-  https://lisbon-local.example/
-
-  <title>Lisbon Food & Culture Tours | Small-Group, Book Today</title>
-  <meta name="description" content="Eat and explore Lisbon like a local. Small‑group food & culture tours with dietary options and free cancellation. Check availability and book today." />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lisbon-local.example/" />
-  <meta property="og:title" content="Lisbon Food & Culture Tours | Small-Group, Book Today" />
-  <meta property="og:description" content="Eat and explore Lisbon like a local. Small‑group food & culture tours with dietary options and free cancellation. Check availability and book today." />
-  <meta property="og:locale" content="en_GB" />
-  <!-- Optional: add og:image with absolute URL and dimensions for nicer shares -->
-  <!-- <meta property="og:image" content="https://lisbon-local.example/og-image.jpg" />
-       <meta property="og:image:width" content="1200" />
-       <meta property="og:image:height" content="630" /> -->
-
-  <meta name="theme-color" content="#0f766e" />
-
-  <style>
-    :root{
-      --bg:#0b0f14;--surface:#0f1720;--card:#121a24;--text:#e6f1ff;--muted:#ced7df;
-      --brand:#0ea5a6;--brand-strong:#0f766e;--accent:#f59e0b;--danger:#ef4444;--success:#22c55e;--focus:#a78bfa;
-      --shadow:0 10px 30px rgba(0,0,0,.3);--radius:14px;--radius-lg:22px;--space-lg:24px;--maxw:1200px;
-    }
-    @media (prefers-color-scheme: light){:root{--bg:#f7fafc;--surface:#fff;--card:#fff;--text:#0b1220;--muted:#475569;--accent:#b45309;--shadow:0 8px 24px rgba(0,0,0,.08);}}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(1200px 600px at 80% -10%,#124e4e22,transparent),var(--bg);color:var(--text);line-height:1.5}
-    img,svg,video{max-width:100%;display:block}
-    a{color:inherit;text-decoration:none}
-    button{font:inherit;cursor:pointer}
-    :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 var(--space-lg)}
-    @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}}
-
-    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
-
-    /* Skip link */
-    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{position:fixed;left:12px;top:12px;width:auto;height:auto;background:#000;color:#fff;padding:10px 14px;border-radius:8px;z-index:9999}
-
-    /* Sticky header */
-    .header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab,var(--surface) 78%,transparent);border-bottom:1px solid color-mix(in oklab,var(--text) 10%,transparent)}
-    .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
-    .brand-badge{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-strong));display:inline-grid;place-items:center;color:#fff;font-size:18px;font-weight:800;box-shadow:var(--shadow)}
-    .nav-links{display:flex;gap:16px;align-items:center}
-    .nav-links a{color:var(--muted);font-weight:700}
-    .nav-links a:hover,.nav-links a:focus-visible{color:var(--text)}
-    .cta-primary{background:linear-gradient(135deg,var(--brand),var(--brand-strong));color:#fff;border:none;padding:10px 16px;border-radius:999px;font-weight:800;box-shadow:var(--shadow)}
-    .cta-primary:hover,.cta-primary:focus-visible{filter:brightness(1.1)}
-    @media (max-width:760px){.nav-links a.label{display:none}}
-
-    /* Ensure section anchors don't sit under the sticky header */
-    .hero,.section{scroll-margin-top:84px}
-
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:42px 0 8px}
-    @media (max-width:920px){.hero{grid-template-columns:1fr}}
-    .hero-card{background:linear-gradient(180deg,color-mix(in oklab,var(--surface) 90%,transparent),color-mix(in oklab,var(--card) 90%,transparent));border:1px solid color-mix(in oklab,var(--text) 10%,transparent);border-radius:var(--radius-lg);padding:clamp(18px,2.5vw,28px);box-shadow:var(--shadow)}
-    .kicker{color:var(--brand);font-weight:900;letter-spacing:.6px;text-transform:uppercase;font-size:12px}
-    h1{margin:6px 0 8px;font-size:clamp(28px,5vw,44px);line-height:1.1}
-    .sub{color:var(--muted);font-size:clamp(14px,1.8vw,18px)}
-    .hero-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-top:16px;align-items:end}
-    .field{display:grid;gap:6px}
-    label{font-size:13px;color:var(--muted)}
-    input[type="date"],select,.btn{background:var(--card);color:var(--text);border:1px solid color-mix(in oklab,var(--text) 12%,transparent);border-radius:14px;padding:10px 12px}
-    .notice{margin-top:10px;font-size:13px;color:var(--muted)}
-
-    /* Sections */
-    .section{padding:40px 0}
-    .section h2{font-size:clamp(22px,3.8vw,32px);margin:0 0 10px}
-    .section p.lead{color:var(--muted);margin-top:0}
-
-    /* Grid */
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-    @media (max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-
-    .card{background:var(--card);border:1px solid color-mix(in oklab,var(--text) 10%,transparent);border-radius:14px;overflow:clip;box-shadow:var(--shadow);display:grid;grid-template-rows:auto auto;position:relative}
-    .card-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0f1720}
-    .card-media img{width:1200;height:800;max-width:100%;object-fit:cover;display:block}
-    .card-body{padding:14px;display:grid;gap:10px}
-    .card h3{margin:0;font-size:18px}
-    .tags{display:flex;flex-wrap:wrap;gap:6px}
-    .tag{font-size:12px;color:#fff;background:color-mix(in oklab,var(--brand-strong) 90%,black 0%);padding:4px 8px;border-radius:999px}
-    .meta{color:var(--muted);font-size:13px}
-    .where{font-weight:700}
-    .card-actions{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{border:1px solid color-mix(in oklab,var(--text) 12%,transparent);border-radius:999px;padding:8px 12px;background:linear-gradient(180deg,color-mix(in oklab,var(--surface) 94%,transparent),color-mix(in oklab,var(--card) 94%,transparent));color:var(--text);font-weight:800}
-    .btn:hover,.btn:focus-visible{filter:brightness(1.08)}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-strong));color:#fff;border:none}
-    .card.highlight{box-shadow:0 0 0 3px var(--accent),var(--shadow);transition:box-shadow .4s ease}
-
-    /* Quiz (moods) */
-    .quiz{display:grid;gap:10px;background:linear-gradient(180deg,color-mix(in oklab,var(--surface) 90%,transparent),color-mix(in oklab,var(--card) 90%,transparent));border:1px solid color-mix(in oklab,var(--text) 10%,transparent);border-radius:22px;padding:16px}
-    .quiz .answers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    @media (max-width:700px){.quiz .answers{grid-template-columns:repeat(2,1fr)}}
-    .quiz .answers label{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid color-mix(in oklab,var(--text) 12%,transparent);background:color-mix(in oklab,var(--card) 94%,black 0%)}
-    .quiz-result{margin-top:10px;padding:10px;border-radius:14px;background:color-mix(in oklab,var(--success) 10%,var(--surface))}
-
-    /* Map */
-    .map-wrap{border:1px solid color-mix(in oklab,var(--text) 10%,transparent);border-radius:22px;overflow:clip;box-shadow:var(--shadow)}
-    .map{width:100%;height:380px;border:0}
-
-    /* UGC */
-    .ugc{display:grid;gap:12px;background:linear-gradient(180deg,color-mix(in oklab,var(--surface) 90%,transparent),color-mix(in oklab,var(--card) 90%,transparent));border:1px solid color-mix(in oklab,var(--text) 10%,transparent);border-radius:22px;padding:16px}
-    .ugc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    @media (max-width:900px){.ugc-grid{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:600px){.ugc-grid{grid-template-columns:repeat(2,1fr)}}
-    .ugc-item{aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#0f1720;display:grid;place-items:center;color:var(--muted);font-size:12px;border:1px dashed color-mix(in oklab,var(--text) 16%,transparent)}
-    .helper{font-size:12px;color:var(--muted)}
-
-    /* Cookie banner */
-    .cookie-banner{position:fixed;inset:auto 0 0 0;background:color-mix(in oklab,var(--surface) 95%,black 0%);border-top:1px solid color-mix(in oklab,var(--text) 12%,transparent);padding:12px var(--space-lg);display:none;z-index:100}
-    .cookie-inner{max-width:var(--maxw);margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;color:var(--muted)}
-    .cookie-actions{display:flex;gap:8px;flex-wrap:wrap}
-
-    footer{padding:24px 0 56px;color:var(--muted);font-size:14px}
-    footer a{color:var(--muted);text-decoration:underline}
-    footer a:focus-visible, footer a:hover{color:var(--text)}
-  </style>
-</head>
-
-<body>
-  #mainSkip to content</a>
-
-  <!-- Header / Primary Navigation -->
-  <header class="header" role="banner">
-    <div class="container nav">
-      <div class="brand" aria-label="Lisbon Local">
-        <div class="brand-badge" aria-hidden="true">LX</div>
-        <span>Lisbon Local</span>
-      </div>
-      <nav class="nav-links" aria-label="Primary" role="navigation">
-        #heroHome</a>
-        #experiencesExperiences</a>
-        #quizQuiz</a>
-        #mapMap</a>
-        #participateParticipate</a>
-        #experiencesBook</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main" role="main">
-    <!-- Hero -->
-    <section class="container hero" id="hero" aria-labelledby="hero-title" role="region">
-      <div class="hero-card">
-        <div class="kicker">Small‑group • Local guides</div>
-        <h1 id="hero-title">Eat & explore Lisbon like a local</h1>
-        <p class="sub">Food & culture highlights with flexible booking and dietary options.</p>
-
-        <form class="hero-form" onsubmit="event.preventDefault(); document.getElementById('experiences').scrollIntoView({behavior:'smooth'});" aria-labelledby="hero-title">
-          <div class="field">
-            <label for="date">Choose a date</label>
-            <input type="date" id="date" />
-          </div>
-          <div class="field">
-            <label for="time">Preferred time</label>
-            <select id="time">
-              <option>10:00</option>
-              <option>14:00</option>
-              <option>18:00</option>
-            </select>
-          </div>
-          <button class="btn primary" type="submit">Check availability</button>
-        </form>
-        <p class="notice">Free cancellation up to 24h • Small groups • Instant confirmation</p>
-      </div>
-
-      <div class="hero-card" aria-label="Highlights">
-        <ul>
-          <li>Vegan/vegetarian options available</li>
-          <li>Central meeting points</li>
-          <li>4.8★ average rating</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Experiences (Cards) -->
-    <section class="section container" id="experiences" aria-labelledby="exp-title" role="region">
-      <h2 id="exp-title">Signature dishes & experiences</h2>
-      <p class="lead">Pick from authentic tastes to unforgettable city moments.</p>
-
-      <div class="grid" id="cards" aria-live="polite" aria-busy="false">
-        <!-- Cards rendered by JS -->
-      </div>
-    </section>
-
-    <!-- Mood Quiz (1–2 selections => recommendation) -->
-    <section class="section container" id="quiz" aria-labelledby="quiz-title" role="region">
-      <h2 id="quiz-title">Find your perfect plan</h2>
-      <p class="lead">Choose up to two moods — we’ll match you with the best option above.</p>
-
-      <form class="quiz" id="quizForm" aria-describedby="quizHelp">
-        <div id="quizHelp" class="helper">Pick 1–2 moods.</div>
-        <div class="q">
-          <div class="answers">
-            <label><input type="checkbox" name="mood" value="adventure" /> Adventure</label>
-            <label><input type="checkbox" name="mood" value="tradition" /> Tradition</label>
-            <label><input type="checkbox" name="mood" value="sea" /> Sea view</label>
-            <label><input type="checkbox" name="mood" value="budget" /> Budget</label>
-          </div>
-        </div>
-        <div class="q">
-          <button type="submit" class="btn primary">Get recommendation</button>
-          <div id="quizError" class="helper" aria-live="polite"></div>
-        </div>
-        <div id="quizResult" class="quiz-result" hidden aria-live="polite"></div>
-      </form>
-    </section>
-
-    <!-- Map -->
-    <section class="section container" id="map" aria-labelledby="map-title" role="region">
-      <h2 id="map-title">Meeting points & highlights</h2>
-      <p class="lead">Explore central spots — easy access by metro and on foot.</p>
-      <div class="map-wrap">
-        <!-- Note: sandbox for iframes increases security; some Google Maps features may be limited -->
-        https://www.google.com/maps?q=Lisbon&output=embed</iframe>
-      </div>
-      <p class="helper">Tip: open a card’s map/book button for precise locations.</p>
-    </section>
-
-    <!-- Participate / UGC -->
-    <section class="section container" id="participate" aria-labelledby="ugc-title" role="region">
-      <h2 id="ugc-title">Participate & share your moments</h2>
-      <p class="lead">Upload a photo and a short caption — with your permission, we may feature it.</p>
-
-      <form class="ugc" id="ugcForm" onsubmit="event.preventDefault();">
-        <div class="field">
-          <label for="photo">Upload a photo</label>
-          <input type="file" id="photo" accept="image/*" />
-        </div>
-        <div class="field">
-          <label for="caption">Caption</label>
-          <input type="text" id="caption" maxlength="120" placeholder="e.g., First time trying pastéis de nata!" />
-        </div>
-        <label><input type="checkbox" id="consent" /> I consent to share this content on the site.</label>
-        <div class="card-actions">
-          <button class="btn primary" id="shareBtn">Share</button>
-          <span class="helper" id="shareMsg" aria-live="polite"></span>
-        </div>
-        <div class="ugc-grid" id="ugcGrid" aria-live="polite">
-          <!-- Previews appear here -->
-          <div class="ugc-item" aria-hidden="true">Your photo preview</div>
-        </div>
-      </form>
-    </section>
-
-    <footer class="container" role="contentinfo">
-      <small>&copy; <span id="year"></span> Lisbon Local • All rights reserved.</small>
-      <div class="helper" style="margin-top:8px">
-        <strong>Image credits:</strong> Self‑hosted images under your license. Replace the files in <code>/images/</code> as needed.
-      </div>
-    </footer>
-  </main>
-
-  <!-- Cookie consent banner -->
-  <section class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie consent">
-    <div class="cookie-inner">
-      <div id="cookieText">We use privacy‑friendly analytics to improve the site. Accept?</div>
-      <div class="cookie-actions">
-        <button id="cookieDecline" class="btn">Decline</button>
-        <button id="cookieAccept" class="btn primary">Accept</button>
-      </div>
-    </div>
-  </section>
-
-  <!--
-    Analytics (privacy-friendly) — LOAD ONLY AFTER CONSENT
-
-    HOW TO ENABLE:
-    1) Pick ONE provider below and fill in the config in analyticsConfig.
-    2) Consent flow calls loadAnalytics() to inject the script dynamically.
-    3) Keep these example script tags COMMENTED to prevent accidental loading.
-
-    Option A — Plausible (no cookies):
-      https://plausible.io/js/plausible.js</script>
-      - In JS below, set analyticsConfig.plausibleDomain = "YOUR-DOMAIN.tld"
-
-    Option B — Matomo (cookieless / consent mode):
-      <!-- Example (do not enable unless consented) -->
-      <!--
-      <script>
-        var _paq = window._paq = window._paq || [];
-        _paq.push(['disableCookies']);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="https://MATOMO-HOST/";
-          _paq.push(['setTrackerUrl', u+'matomo.php']);
-          _paq.push(['setSiteId', 'YOUR_SITE_ID']);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
-      -->
-  -->
-
-  <script>
-    /* =========================
-       Self-hosted image helpers
-       - Convention: images/<base>_400.jpg, _800.jpg, _1200.jpg
-       - Fallback: images/fallback.jpg
-       ========================= */
-    function localImgSrc(base, w) {
-      // w ∈ {400, 800, 1200}
-      return `images/${base}_${w}.jpg`;
-    }
-    function localSrcset(base) {
-      return [
-        `images/${base}_400.jpg 400w`,
-        `images/${base}_800.jpg 800w`,
-        `images/${base}_1200.jpg 1200w`
-      ].join(', ');
-    }
-    function localFallback() {
-      return `images/fallback.jpg`;
-    }
-
-    /* =========================
-       Content (data) — 6 items (self-hosted images)
-       imgBase corresponds to the filename base in /images
-       ========================= */
-    const items = [
-      {
-        id: "nata",
-        type: "dish",
-        imgBase: "nata",
-        alt: "Portuguese pastel de nata next to a cup of espresso",
-        title: "Pastel de Nata Tasting",
-        story: "Born in Lisbon’s monasteries, this creamy custard tart is a sweet symbol of Portugal. Pair it with a strong espresso for the ultimate local ritual.",
-        tags: ["Sweet", "Traditional", "Coffee pairing"],
-        meta: "15 min | €2–3 each",
-        where: "Pastéis de Belém or Manteigaria",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/Past%C3%A9is+de+Bel%C3%A9m+Lisbon"
-      },
-      {
-        id: "bras",
-        type: "dish",
-        imgBase: "bras",
-        alt: "Plate of codfish with eggs and straw potatoes",
-        title: "Bacalhau à Brás",
-        story: "A comforting mix of shredded cod, eggs, and crispy potatoes — a love letter to Portugal’s bacalhau tradition.",
-        tags: ["Savory", "Comfort food", "Seafood"],
-        meta: "30 min | €12–15",
-        where: "Taberna da Rua das Flores",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/Taberna+da+Rua+das+Flores+Lisbon"
-      },
-      {
-        id: "ginja",
-        type: "drink",
-        imgBase: "ginja",
-        alt: "Small glass of cherry liqueur with a cherry garnish",
-        title: "Ginjinha Experience",
-        story: "A sip of cherry liqueur in a tiny glass, often with a cherry inside. A Lisbon tradition that warms the soul.",
-        tags: ["Drink", "Local tradition", "Sweet"],
-        meta: "10 min | €1.50–2",
-        where: "A Ginjinha (Rossio)",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/A+Ginjinha+Rossio+Lisbon"
-      },
-      {
-        id: "alfama",
-        type: "experience",
-        imgBase: "alfama",
-        alt: "Narrow, sunlit street in Lisbon’s Alfama with tiled façades",
-        title: "Alfama Walking Tour",
-        story: "Wander through Lisbon’s oldest district, where Fado echoes in narrow alleys and history lives on every tile.",
-        tags: ["Culture", "History", "Walking tour"],
-        meta: "2h | €20–25",
-        where: "Book via local tour operators or Airbnb Experiences",
-        linkLabel: "Where / Book",
-        link: "https://www.google.com/search?q=Alfama+walking+tour+Lisbon"
-      },
-      {
-        id: "mercado",
-        type: "experience",
-        imgBase: "mercado",
-        alt: "Busy indoor food hall with people dining at shared tables",
-        title: "Mercado da Ribeira Food Crawl",
-        story: "Taste Lisbon’s culinary diversity under one roof — from seafood to modern twists on classics. Perfect for grazing and people‑watching.",
-        tags: ["Foodie", "Market", "Trendy"],
-        meta: "1.5h | €15–30",
+        title: "Mercado da Ribeira",
+        img: "images/Mercado_1200.jpg", // substitui por "images/mercado_1200.jpg"
+        alt: "Bancas de comida e mesas corridas",
+        text: "Vários sabores num só sítio.",
+		meta: ["1.5h | €15–30"],
         where: "Time Out Market Lisbon",
+        tags: ["Comida","Mercado","Trendy"],
+      },
+	  {
+        id: "ginja",
+        type: "drink",
+        alt: "Small glass of cherry liqueur with a cherry garnish",
+        title: "Ginjinha Experience",
+		img: "images/Ginja_1200.jpg", // substitui por "images/Ginja_1200.jpg"
+        story: "A sip of cherry liqueur in a tiny glass, often with a cherry inside. A Lisbon tradition that warms the soul.",
+        tags: ["Drink", "Local tradition", "Sweet"],
+       meta: ["10 min | €1.50–20"],
+        where: "A Ginjinha (Rossio)",
         linkLabel: "Where / Book",
-        link: "https://www.google.com/maps/search/Time+Out+Market+Lisbon"
+        link: "https://www.google.com/maps/search/A+Ginjinha+Rossio+Lisbon"
       },
       {
         id: "cruise",
@@ -824,65 +344,42 @@
         imgBase: "cruise",
         alt: "Sailboat at sunset on calm water with warm sky",
         title: "Sunset Tagus River Cruise",
+		img: "images/Cruise_1200.jpg", // substitui por "images/cruise_1200.jpg"
         story: "Glide along the Tagus as the city glows golden. A magical way to see Lisbon’s skyline and bridges at dusk.",
         tags: ["Scenic", "Romantic", "Boat tour"],
-        meta: "1.5h | €35–45",
+       meta: ["1.5h | €35–45"],
         where: "Cais do Sodré or online booking platforms",
         linkLabel: "Where / Book",
         link: "https://www.google.com/search?q=Tagus+river+sunset+cruise+Lisbon+booking"
       }
     ];
 
-    /* =========================
-       Render Cards (self-hosted images + fallback)
-       ========================= */
-    function renderCards() {
+    // === Renderização simples das cards ===
+    function renderCards(){
       const container = document.getElementById("cards");
-      container.setAttribute("aria-busy", "true");
-
-      const sizesAttr = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
-
-      container.innerHTML = items.map((item, idx) => {
-        const tags = item.tags.map(t => `<span class="tag">${t}</span>`).join("");
-        const src = localImgSrc(item.imgBase, 1200);
-        const srcset = localSrcset(item.imgBase);
-        const eager = idx === 0; // treat first card as likely LCP
-        const fallback = localFallback();
-
+      container.innerHTML = items.map((it, idx) => {
+        const tags = (it.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("");
+		const meta = (it.meta||[]).map(t=>`<span class="meta">${t}</span>`).join("");
+        const eager = idx === 0 ? "eager" : "lazy";
         return `
-          <article class="card" id="card-${item.id}" aria-labelledby="title-${item.id}">
+          <article class="card" id="card-${it.id}">
             <figure class="card-media">
-              ${src}
+              <img src="${it.img}" alt="${it.alt}" loading="${eager}" decoding="async"
+                   onerror="this.onerror=null; this.src='images/nata_1200.jpg';">
             </figure>
             <div class="card-body">
-              <h3 id="title-${item.id}">${item.title}</h3>
-              <p>${item.story}</p>
-              <div class="tags" aria-label="tags">${tags}</div>
-              <div class="meta">${item.meta}</div>
-              <div class="where">${item.where}</div>
-              <div class="card-actions">
-                #quizDetails</a>
-                ${item.link}${item.linkLabel}</a>
-              </div>
+              <h3>${it.title}</h3>
+              <p class="muted">${it.text||""}</p>
+                       <div class="tags">${tags}</div>
+					   <div class="meta">${meta}</div>
             </div>
           </article>
         `;
       }).join("");
-
-      container.setAttribute("aria-busy", "false");
-
-      // Smooth-scroll for internal links
-      document.querySelectorAll('[data-scroll]').forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          const id = a.getAttribute('href').slice(1);
-          const el = document.getElementById(id);
-          if (el) el.scrollIntoView({behavior: 'smooth'});
-        });
-      });
     }
-
-    /* =========================
+    document.addEventListener("DOMContentLoaded", renderCards);
+	
+	 /* =========================
        Mood Quiz (1–2 selections => recommendation)
        ========================= */
     function setupQuiz() {
@@ -1037,6 +534,10 @@
       setupUGC();
       setupCookieBanner();
     });
+	
+	
   </script>
+
+
 </body>
 </html>
